@@ -10,7 +10,8 @@
   		<h2>Book detail</h2>
   		<table class='table'>
   		  <tr>
-  		    <td><%= link_to user_path(@book.user) do %>
+  		    <td>
+  		      <%= link_to user_path(@book.user) do %>
             <%= attachment_image_tag(@book.user, :profile_image, :fill, 100, 100, fallback: "no-image-icon.jpg") %><br>
             <%= @book.user.name %>
             <% end %>
@@ -20,6 +21,19 @@
         <% if @book.user == current_user %>
           <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
           <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
+        <% end %>
+        <% if  @book.favorited_by?(current_user) %>
+          <td>
+            <%= link_to book_favorites_path(@book), method: :delete do %>
+              ♥<%= @book.favorites.count %>
+            <% end %>
+          </td>
+        <% else %>
+          <td>
+            <%= link_to book_favorites_path(@book), method: :post do %>
+              ♡<%= @book.favorites.count %>
+            <% end %>
+          </td>
         <% end %>
         </tr>
       </table>
@@ -41,8 +55,8 @@
       </table>
       <div class="new-comment">
         <%= form_with(model:[@book, @post_comment], local: true) do |f| %>
-          <%= f.text_area :comment, rows:'5' %>
-          <%= f.submit "送信" %>
+          <%= f.text_area :comment, rows:'3' %>
+          <br><%= f.submit "送信" %>
         <% end %>
       </div>
     </div>
