@@ -1,4 +1,5 @@
 class PostCommentsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     book = Book.find(params[:book_id]) #本来(params[:id])→本のidを探してる?
@@ -10,7 +11,7 @@ class PostCommentsController < ApplicationController
 
   def destroy
     PostComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
-    redirect_to book_path(params[:book_id])
+    redirect_to request.referer
   end
 
   private
