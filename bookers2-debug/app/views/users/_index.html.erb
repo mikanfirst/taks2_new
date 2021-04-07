@@ -11,6 +11,10 @@
       <tr>
         <td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
         <td><%= user.name %></td>
+        <td>フォロー数</td>
+        <td>フォロワー数</td>
+        if文入れる↓
+        <td></td>
         <td><%= link_to 'Show', user_path(user), class: "user_#{user.id}" %></td>
       </tr>
     <% end %>
