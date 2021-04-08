@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users,only: [:show,:index,:edit,:update]
-  post 'follow/:id' => 'relationships#follow', as: 'follow' #　フォローする
-  post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow' #フォローを外す
+
+  root 'homes#top'
+  get 'home/about' => 'homes#about'
+
+  resources :users, only: [:show,:index,:edit,:update] do
+    resource :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings' #　フォローする
+    get 'followers' => 'relationships#followers', as: 'followers' #フォローを外す
+  end
   resources :books do
     resource :favorites,only: [:create, :destroy]
     resources :post_comments,only: [:create, :destroy]
   end
-  root 'homes#top'
-  get 'home/about' => 'homes#about'
+
 end
