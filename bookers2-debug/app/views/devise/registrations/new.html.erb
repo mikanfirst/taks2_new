@@ -13,9 +13,9 @@
           <%= f.email_field :email, autofocus: true, class: "email" %>
         </div>
         <div class="field">
-          <%= f.label :パスワード>
+          <%= f.label :パスワード %>
           <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> )</em>
+          <em>(<%= @minimum_password_length %>)</em>
           <% end %><br />
           <%= f.password_field :password, autocomplete: "off", class: "password" %>
         </div>
