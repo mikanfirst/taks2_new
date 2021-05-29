@@ -26,6 +26,7 @@
       <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: "btn btn-success" %>
     <% end %>
   <% else %>
+  <!--アイコンをリンクにする場合 '' 内を空で記入-->
     <%= link_to '',edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
   <% end %>
 </div>
